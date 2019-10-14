@@ -9,5 +9,6 @@ namespace Test.Entity
     class NewNote
     {
         public string CreateNote { get; set; }
+        public string NoteName { get; set; }
     }
 }

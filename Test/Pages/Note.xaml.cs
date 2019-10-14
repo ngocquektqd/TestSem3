@@ -30,18 +30,20 @@ namespace Test.Pages
 
         private async void ButtonClick_SaveAsyn(object sender, RoutedEventArgs e)
         {
+            
             var note = new Entity.NewNote
             {
-                CreateNote = this.createNote.Text
+                CreateNote = this.createNote.Text,
             };
+            string NoteName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             //Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             //Windows.Storage.StorageFile sampleFile = storageFolder.GetFileAsync("sample.txt").GetAwaiter().GetResult();
             Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             Windows.Storage.StorageFile sampleFile =
-                await storageFolder.CreateFileAsync("sample.txt",
+                await storageFolder.CreateFileAsync(NoteName,
                 Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            await Windows.Storage.FileIO.WriteTextAsync(sampleFile,"+createNote");
+            await Windows.Storage.FileIO.WriteTextAsync(sampleFile,createNote.Text);
             var recentnote = Windows.Storage.FileIO.ReadTextAsync(sampleFile).GetAwaiter().GetResult();
             Debug.WriteLine(recentnote);
         }
